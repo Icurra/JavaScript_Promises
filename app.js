@@ -1,20 +1,19 @@
 // TODO: Rewrite 'watchTutorialCallback' as a promise
 
-function watchTutorialCallback(callback, errorCallback) {
-  let userLeft = false;
+let promise = new Promise((resolve, reject) => {
+  let userLeft = Boolean(Math.round(Math.random()));
 
   if (userLeft) {
-    errorCallback("User left.");
+    reject(new Error("User left."));
   } else {
-    callback("Thumbs up and Subscribe!");
+    resolve("Thumbs up and Subscribe!");
   }
-}
+});
 
-watchTutorialCallback(
-  (message) => {
-    console.log(message);
-  },
-  (error) => {
-    console.log(error.name + " " + error.message);
-  }
-);
+promise
+  .then((result) => {
+    console.log(result);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
